@@ -1,0 +1,50 @@
+[
+  {
+    "id": "s1",
+    "title": "Home Cleaning",
+    "subtitle": "• Thorough dusting and vacuuming for all rooms.\n• Eco-friendly cleaning products safe for kids and pets.\n• Kitchen and bathroom deep cleaning available.\n• Flexible hourly or package-based services.\n• Professional team trained for spotless results.",
+    "price": "From AED 99",
+    "icon": "🧹",
+    "image": "/images/services/cleaning.webp"
+  },
+  {
+    "id": "s2",
+    "title": "Plumbing",
+    "subtitle": "• Quick response for leaks, clogs, and pipe bursts.\n• Installation of sinks, faucets, and bathroom fixtures.\n• Water heater repairs and maintenance.\n• Affordable preventive maintenance packages.\n• Experienced plumbers ensuring lasting solutions.",
+    "price": "Starting AED 120",
+    "icon": "🚰",
+    "image": "/images/services/plumbing.webp"
+  },
+  {
+    "id": "s3",
+    "title": "Electrical",
+    "subtitle": "• Safe repair of faulty wiring and power issues.\n• Installation of lights, fans, and smart switches.\n• Regular electrical maintenance for homes.\n• Emergency troubleshooting and quick fixes.\n• Certified electricians following safety standards.",
+    "price": "From AED 90",
+    "icon": "💡",
+    "image": "/images/services/electrical.webp"
+  },
+  {
+    "id": "s4",
+    "title": "Appliance Repair",
+    "subtitle": "• Repairs for washing machines, ovens, and fridges.\n• Diagnostic check to find issues quickly.\n• Affordable spare parts with warranty options.\n• Preventive maintenance to extend appliance life.\n• Skilled technicians for all major brands.",
+    "price": "Diagnostic AED 50",
+    "icon": "🔧",
+    "image": "/images/services/appliance.avif"
+  },
+  {
+    "id": "s5",
+    "title": "Home Delivery",
+    "subtitle": "• Same-day delivery available for urgent needs.\n• Real-time tracking for your packages.\n• Safe handling for fragile and valuable items.\n• Affordable pricing for local deliveries.\n• Reliable team ensuring on-time service.",
+    "price": "From AED 15",
+    "icon": "📦",
+    "image": "/images/services/delivery.jpeg"
+  },
+  {
+    "id": "s6",
+    "title": "AC Maintenance",
+    "subtitle": "• Seasonal deep cleaning of AC units.\n• Gas refilling and cooling performance checks.\n• Preventive maintenance to reduce breakdowns.\n• Emergency repair for sudden failures.\n• Skilled technicians for all AC models.",
+    "price": "From AED 120",
+    "icon": "❄️",
+    "image": "/images/services/ac.webp"
+  }
+]
