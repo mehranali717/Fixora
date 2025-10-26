@@ -11,8 +11,8 @@ import { OpenStreetMapProvider } from "leaflet-geosearch";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-import Input from "../ui/Input";
-import Button from "../ui/Button";
+import Input from "../../../ui/Input";
+import Button from "../../../ui/Button";
 
 // Custom emerald marker using inline SVG
 const emeraldMarker = new L.DivIcon({

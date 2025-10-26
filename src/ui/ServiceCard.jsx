@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Button from '../ui/Button'
-import BookingModal from '../components/booking/BookingModal'
+import BookingModal from '../components/booking'
 
 export default function ServiceCard({ id, title, description, price, icon, image }) {
   const [showBook, setShowBook] = useState(false)
@@ -40,7 +40,7 @@ export default function ServiceCard({ id, title, description, price, icon, image
       </div>
 
       {showBook && (
-        <BookingModal 
+        <BookingModal
           service={{ id, title, price }}
           onClose={() => setShowBook(false)}
         />
