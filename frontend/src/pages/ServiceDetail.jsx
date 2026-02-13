@@ -1,17 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import services from "../data/services.json";
+import axios from "axios";
 import Button from "../ui/Button";
 import BookingModal from "../components/booking";
 
 export default function ServiceDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const service = services.find((s) => s.id === id);
 
+  const [service, setService] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [openBook, setOpenBook] = useState(false);
 
-  if (!service)
+  useEffect(() => {
+    axios.get(`http://localhost:5000/api/services/${id}`)
+      .then(res => {
+        setService(res.data);
+      })
+      .catch(() => setService(null))
+      .finally(() => setLoading(false));
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="pt-[150px] text-center text-gray-500">
+        Loading service...
+      </div>
+    );
+  }
+
+  if (!service) {
     return (
       <div className="max-w-4xl mx-auto pt-[100px] p-6">
         <div className="text-center">
@@ -27,6 +45,7 @@ export default function ServiceDetail() {
         </div>
       </div>
     );
+  }
 
   return (
     <div className="max-w-5xl mx-auto pt-[100px] p-6">
@@ -40,7 +59,7 @@ export default function ServiceDetail() {
             />
           ) : (
             <div className="w-full h-80 bg-gray-100 rounded-lg flex items-center justify-center text-4xl">
-              {service.icon}
+              {service.icon || "?"}
             </div>
           )}
         </div>
@@ -48,7 +67,7 @@ export default function ServiceDetail() {
         <div>
           <h1 className="text-2xl font-bold text-blue-900">{service.title}</h1>
           <div className="mt-3 space-y-2">
-            {service.subtitle.split("\n").map((line, i) => (
+            {service.subtitle?.split("\n").map((line, i) => (
               <div
                 key={i}
                 className="flex items-start gap-2 text-sm text-gray-600"
@@ -79,7 +98,7 @@ export default function ServiceDetail() {
       {openBook && (
         <BookingModal
           service={{
-            id: service.id,
+            id: service._id,
             title: service.title,
             price: service.price,
           }}

@@ -32,8 +32,10 @@ export default function Header() {
         </nav>
         {/* Buttons */}
         <div className="flex items-center gap-3">
+          <Link to="/login">
           <Button variant={"outline"}>Sign in</Button>
-          <Link to="/services">
+          </Link>
+          <Link to="/signup">
             <Button className="hidden md:inline-block bg-emerald-500">
               Get started
             </Button>
