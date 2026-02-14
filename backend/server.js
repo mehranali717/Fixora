@@ -1,24 +1,15 @@
-import express from "express";
-import dotenv from "dotenv";
-import cors from "cors";
-import connectDB from "./config/db.js";
-import authRoutes from "./routes/authRoutes.js";
-import serviceRoutes from "./routes/serviceRoutes.js";
+import app from "./src/app.js";
+import connectDB from "./src/config/db.js";
+import { env } from "./src/config/env.js";
 
-dotenv.config();
-const app = express();
-connectDB();
+const bootstrap = async () => {
+  await connectDB();
+  app.listen(env.PORT, () => {
+    process.stdout.write(`Fixora API running on port ${env.PORT}\n`);
+  });
+};
 
-app.use(cors());
-app.use(express.json());
-
-app.use("/api/auth", authRoutes);
-app.use("/api/services", serviceRoutes);
-
-
-app.get("/", (req, res) => {
-  res.send("Fixora Backend Working ✅");
+bootstrap().catch((error) => {
+  process.stderr.write(`Startup failed: ${error.message}\n`);
+  process.exit(1);
 });
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
