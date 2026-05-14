@@ -26,6 +26,7 @@ export default function AdminLayout() {
           <NavLink to="/admin/services" className={linkClass}>Services</NavLink>
           <NavLink to="/admin/categories" className={linkClass}>Categories</NavLink>
           <NavLink to="/admin/bookings" className={linkClass}>Bookings</NavLink>
+          <NavLink to="/admin/time-slots" className={linkClass}>Time Slots</NavLink>
           <NavLink to="/admin/users" className={linkClass}>Users</NavLink>
         </nav>
       </aside>

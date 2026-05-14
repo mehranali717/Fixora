@@ -85,12 +85,20 @@ export const api = createApi({
       query: (payload) => ({ url: "bookings", method: "POST", body: payload }),
       invalidatesTags: ["Booking"],
     }),
+    getTimeSlots: builder.query({
+      query: ({ date, city }) => ({ url: "time-slots", params: { date, city } }),
+      providesTags: ["Booking"],
+    }),
+    upsertTimeSlots: builder.mutation({
+      query: (payload) => ({ url: "time-slots", method: "POST", body: payload }),
+      invalidatesTags: ["Booking"],
+    }),
     getMyBookings: builder.query({
       query: () => "bookings/my",
       providesTags: ["Booking"],
     }),
     getAllBookings: builder.query({
-      query: () => "bookings",
+      query: (params = {}) => ({ url: "bookings", params }),
       providesTags: ["Booking"],
     }),
     updateBookingStatus: builder.mutation({
@@ -153,6 +161,8 @@ export const {
   useGetCategoriesQuery,
   useCreateCategoryMutation,
   useCreateBookingMutation,
+  useGetTimeSlotsQuery,
+  useUpsertTimeSlotsMutation,
   useGetMyBookingsQuery,
   useGetAllBookingsQuery,
   useUpdateBookingStatusMutation,

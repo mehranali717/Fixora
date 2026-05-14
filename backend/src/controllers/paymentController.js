@@ -6,11 +6,14 @@ import asyncHandler from "../utils/asyncHandler.js";
 
 export const createCheckoutSession = asyncHandler(async (req, res) => {
   if (!stripe) throw new AppError("Stripe is not configured", 503);
+
   const { bookingId } = req.body;
   const booking = await Booking.findById(bookingId).populate("service");
 
   if (!booking) throw new AppError("Booking not found", 404);
   if (booking.user.toString() !== req.user._id.toString()) throw new AppError("Forbidden", 403);
+  if (booking.paymentMethod !== "card") throw new AppError("Checkout is only available for card payments", 400);
+  if (booking.paymentStatus === "paid") throw new AppError("Booking is already paid", 400);
 
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
@@ -21,7 +24,7 @@ export const createCheckoutSession = asyncHandler(async (req, res) => {
         quantity: 1,
         price_data: {
           currency: "aed",
-          unit_amount: Math.round(booking.totalAmount * 100),
+          unit_amount: Math.round(booking.pricing.total * 100),
           product_data: {
             name: booking.service.title,
             description: booking.service.description.slice(0, 120),
@@ -57,10 +60,11 @@ export const stripeWebhook = asyncHandler(async (req, res) => {
   if (event.type === "checkout.session.completed") {
     const session = event.data.object;
     const bookingId = session?.metadata?.bookingId;
+
     if (bookingId) {
       await Booking.findByIdAndUpdate(bookingId, {
         paymentStatus: "paid",
-        status: "approved",
+        status: "pending",
         stripePaymentIntentId: session.payment_intent || "",
       });
     }

@@ -10,7 +10,7 @@ export const getAnalytics = asyncHandler(async (_req, res) => {
     Booking.countDocuments(),
     Booking.aggregate([
       { $match: { paymentStatus: "paid" } },
-      { $group: { _id: null, total: { $sum: "$totalAmount" } } },
+      { $group: { _id: null, total: { $sum: "$pricing.total" } } },
     ]),
     Booking.find()
       .populate("service", "title")
@@ -18,7 +18,7 @@ export const getAnalytics = asyncHandler(async (_req, res) => {
       .sort({ createdAt: -1 })
       .limit(5),
     Booking.aggregate([
-      { $group: { _id: "$service", bookings: { $sum: 1 }, revenue: { $sum: "$totalAmount" } } },
+      { $group: { _id: "$service", bookings: { $sum: 1 }, revenue: { $sum: "$pricing.total" } } },
       { $sort: { bookings: -1 } },
       { $limit: 10 },
       {

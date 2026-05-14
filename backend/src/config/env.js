@@ -41,4 +41,5 @@ export const env = {
   SMTP_USER: process.env.SMTP_USER || "",
   SMTP_PASS: process.env.SMTP_PASS || "",
   SMTP_FROM: process.env.SMTP_FROM || "no-reply@fixora.ae",
+  ALLOW_CASH_ON_SERVICE: (process.env.ALLOW_CASH_ON_SERVICE || "true").toLowerCase() === "true",
 };

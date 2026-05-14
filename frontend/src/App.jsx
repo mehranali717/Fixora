@@ -7,6 +7,7 @@ import AdminAnalyticsPage from "./pages/admin/AdminAnalyticsPage.jsx";
 import AdminBookingsPage from "./pages/admin/AdminBookingsPage.jsx";
 import AdminCategoriesPage from "./pages/admin/AdminCategoriesPage.jsx";
 import AdminServicesPage from "./pages/admin/AdminServicesPage.jsx";
+import AdminTimeSlotsPage from "./pages/admin/AdminTimeSlotsPage.jsx";
 import AdminUsersPage from "./pages/admin/AdminUsersPage.jsx";
 import HomePage from "./pages/public/HomePage.jsx";
 import LoginPage from "./pages/public/LoginPage.jsx";
@@ -43,6 +44,7 @@ export default function App() {
             <Route path="services" element={<AdminServicesPage />} />
             <Route path="categories" element={<AdminCategoriesPage />} />
             <Route path="bookings" element={<AdminBookingsPage />} />
+            <Route path="time-slots" element={<AdminTimeSlotsPage />} />
             <Route path="users" element={<AdminUsersPage />} />
           </Route>
         </Route>

@@ -44,18 +44,20 @@ export default function UserBookingsPage() {
           <article key={booking._id} className="card p-4">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
-                <p className="text-lg font-bold">{booking.service?.title}</p>
+                <p className="text-lg font-bold">{booking.service?.title} <span className="text-sm font-semibold text-slate-500">#{booking.bookingId}</span></p>
                 <p className="text-sm text-slate-600">{new Date(booking.date).toLocaleDateString()} | {booking.timeSlot}</p>
-                <p className="text-sm text-slate-600">{booking.address}</p>
-                <p className="mt-1 text-sm">Status: <strong>{booking.status}</strong> | Payment: <strong>{booking.paymentStatus}</strong></p>
+                <p className="text-sm text-slate-600">{booking.address?.fullAddress}, {booking.address?.city}</p>
+                <p className="text-sm text-slate-600">{booking.address?.propertyType} | {booking.serviceDetails?.serviceVariant || "Standard"}</p>
+                <p className="mt-1 text-sm">Status: <strong>{booking.status}</strong> | Payment: <strong>{booking.paymentStatus}</strong> ({booking.paymentMethod})</p>
+                <p className="text-sm font-semibold text-teal-700">Total: AED {booking.pricing?.total ?? 0}</p>
               </div>
               <div className="flex gap-2">
-                {booking.paymentStatus === "unpaid" ? (
+                {booking.paymentStatus === "unpaid" && booking.paymentMethod === "card" ? (
                   <button onClick={() => handlePay(booking._id)} className="rounded-lg bg-teal-700 px-3 py-2 text-sm font-semibold text-white">
                     Pay now
                   </button>
                 ) : null}
-                {booking.status !== "completed" && booking.status !== "cancelled" ? (
+                {booking.status !== "completed" && booking.status !== "cancelled" && booking.status !== "refunded" ? (
                   <button onClick={() => handleCancel(booking._id)} className="rounded-lg border border-red-300 px-3 py-2 text-sm font-semibold text-red-700">
                     Cancel
                   </button>
